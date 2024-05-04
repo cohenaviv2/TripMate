@@ -5,7 +5,7 @@ import { TripPreferences, TripRecommendation } from "../common/types";
 
 let app: Express;
 
-const userInput: TripPreferences = {
+const userTripPrefs: TripPreferences = {
   destPreferences: "Beach",
   tripDuration: 5,
   budgetRange: "Medium",
@@ -25,7 +25,7 @@ beforeAll(async () => {
 
 describe("Trip API tests", () => {
   test("Test plan a trip", async () => {
-    const response = await request(app).post(`/trip/plan`).send(userInput).expect(200);
+    const response = await request(app).post(`/trip/plan`).send(userTripPrefs).expect(200);
     const tripRecommendation: TripRecommendation = response.body;
     expect(tripRecommendation.location).toBeDefined();
   });

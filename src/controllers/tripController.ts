@@ -1,18 +1,16 @@
 import { Request, Response } from "express";
-import { TripPreferences } from "../common/types";
-import { generateTextResponse } from "../services/aiService";
-import { generateTripPrompt, parseTextResponse } from "../services/tripService";
+import { TripPreferences, TripRecommendation } from "../common/types";
+import { generateAIPrompt, parseTextResponse } from "../services/tripService";
+import { generateTextResponse } from "../services/AIService";
 
 async function planTrip(req: Request, res: Response) {
   const userInput: TripPreferences = req.body;
-
-  const prompt = generateTripPrompt(userInput);
-
+  const prompt = generateAIPrompt(userInput);
   try {
-    const textResponse = await generateTextResponse(prompt);
-    const parsedResponse = parseTextResponse(textResponse);
+    const aiResponse = await generateTextResponse(prompt);
+    const tripRecommendation: TripRecommendation = parseTextResponse(aiResponse);
 
-    return res.json(parsedResponse);
+    return res.json(tripRecommendation);
   } catch (error) {
     console.error("Error in trip planning:", error);
     res.status(500).json({ error: "Failed to plan trip" });

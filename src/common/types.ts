@@ -1,13 +1,13 @@
 type DestPreferences =
   | "Beach"
-  | "Mountains"
   | "City"
+  | "Mountains"
   | "Countryside"
   | "Festival";
 
 type BudgetRange = "Low" | "Medium" | "High";
 
-type Activities =
+type Activity =
   | "Shopping"
   | "Wellness"
   | "Culture"
@@ -16,13 +16,13 @@ type Activities =
   | "Family"
   | "Sports";
 
-type Accommodation = "Hotel" | "Airbnb" | "Camping" | "Resort" | "Guesthouse";
+type Accommodation = "Hotel" | "Resort" | "Airbnb" | "Camping" | "Guesthouse";
 
 export interface TripPreferences {
   destPreferences: DestPreferences;
   tripDuration: number; // Number of days
   budgetRange: BudgetRange;
-  activities: Activities[];
+  activities: Activity[];
   accommodation: Accommodation;
   numTravelers: number;
   ageGroups: {
